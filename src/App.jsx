@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 
 function App() {
   let [getDolarOfi,setDolarOfi] = useState([]);
@@ -8,7 +6,9 @@ function App() {
   useEffect(() =>{
     fetch("https://www.dolarsi.com/api/api.php?type=dolar").then(res => res.json()).then((res) => setDolarOfi(res)).catch((err) => console.log(err))
   },[])
-  console.log(getDolarOfi[0])
+  console.log(getDolarOfi[0],"dolarOfi")
+  jjjj = getDolarOfi[0]["casa"]["venta"].split(",")[0]
+  console.log(jjjj,typeof jjjj)
   return (
     <h1>{jjjj}</h1>
   )
