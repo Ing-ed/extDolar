@@ -1,10 +1,17 @@
+/*global chrome*/
 import { useState, useEffect } from 'react'
 import "./App.css"
+
+
 
 function Form(){
   let [getDolars,setDolars] = useState(1);
   let [getValD, setValD] = useState(0)
   let [getValP, setValP] = useState(0)
+
+  useEffect(() =>{
+    console.log("api",chrome);
+  },[])
 
   function onchange(evt){
     setValD(evt.target.value)
@@ -23,13 +30,17 @@ function Form(){
   },[])
   return(
     <section>
+      <label>dolar - ${getDolars}</label>
       <div>
+        <label>Dolar a pesos</label>
         <input onChange = {onchange} type='number' placeholder='u$s'/>
         <h3>a$r {+getValD * +getDolars}</h3>
       </div>
+      <hr/>
       <div>
+        <label>Pesos a dolar</label>
         <input onChange = {onchange2} type = 'number' placeholder='a$r'/>
-        <h3>u$s {getValP / +getDolars}</h3>
+        <h3>u$s {(getValP / +getDolars).toFixed(2)}</h3>
       </div>
     </section>
   )

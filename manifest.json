@@ -1,0 +1,19 @@
+{
+    "name" : "Dolar a peso",
+    "description":"conversion de dolar a peso",
+    "version": "1.0",
+    "manifest_version": 3,
+    "action":{
+        "default_popup":"index.html"
+    },
+    "commands": {
+        "toggleExtension": {
+          "suggested_key": {
+            "default": "Ctrl+Shift+X",
+            "mac": "MacCtrl+Shift+X"
+          },
+          "description": "Toggle the extension"
+        }
+      }
+
+}
