@@ -5,7 +5,8 @@ import "./App.css"
 
 
 function Form(){
-  let [getDolars,setDolars] = useState(1);
+  let [getOfi,setOfi] = useState(1);
+  let [getBlue,setBlue] = useState(1);
   let [getValD, setValD] = useState(0)
   let [getValP, setValP] = useState(0)
 
@@ -21,23 +22,29 @@ function Form(){
   }
   useEffect(() =>{
     fetch("https://www.dolarsi.com/api/api.php?type=dolar").then(res => res.json())
-    .then((res) => setDolars(res[0].casa.venta.replace(",",".")))
+    .then((res) => {
+      setOfi(res[0].casa.venta.replace(",","."))
+      setBlue(res[1].casa.venta.replace(",","."))
+  })
     // .then((res) => console.log(res[0].casa.venta))
     .catch((err) => console.log(err))
   },[])
   return(
     <section>
-      <label>dolar - ${getDolars}</label>
+      <label>dolar-Of - ${getOfi}</label>
+      <label>dolar-Bl - ${getBlue}</label>
       <div>
         <label>Dolar a pesos</label>
         <input onChange = {onchange} type='number' placeholder='u$s'/>
-        <h3>a$r {(+getValD * +getDolars).toFixed(2)}</h3>
+        <h3>Oficial ${(+getValD * +getOfi).toFixed(2)}</h3>
+        <h3>Blue ${(+getValD * +getBlue).toFixed(2)}</h3>
       </div>
       <hr/>
       <div>
         <label>Pesos a dolar</label>
         <input onChange = {onchange2} type = 'number' placeholder='a$r'/>
-        <h3>u$s {(getValP / +getDolars).toFixed(2)}</h3>
+        <h3>Oficial ${(getValP / +getOfi).toFixed(2)}</h3>
+        <h3>Blue ${(getValP / +getBlue).toFixed(2)}</h3>
       </div>
     </section>
   )
