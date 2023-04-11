@@ -15,16 +15,13 @@ function Form(){
 
   function onchange(evt){
     setValD(evt.target.value)
-    console.log(getDolars)
-    console.log(+getValD * +getDolars)
   }
   function onchange2(evt){
     setValP(evt.target.value)
-    console.log(evt.target.value)
   }
   useEffect(() =>{
     fetch("https://www.dolarsi.com/api/api.php?type=dolar").then(res => res.json())
-    .then((res) => setDolars(res[0].casa.venta.split(",")[0]))
+    .then((res) => setDolars(res[0].casa.venta.replace(",",".")))
     // .then((res) => console.log(res[0].casa.venta))
     .catch((err) => console.log(err))
   },[])
@@ -34,7 +31,7 @@ function Form(){
       <div>
         <label>Dolar a pesos</label>
         <input onChange = {onchange} type='number' placeholder='u$s'/>
-        <h3>a$r {+getValD * +getDolars}</h3>
+        <h3>a$r {(+getValD * +getDolars).toFixed(2)}</h3>
       </div>
       <hr/>
       <div>
