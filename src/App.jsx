@@ -9,9 +9,9 @@ function Form(){
   let [getValD, setValD] = useState(0)
   let [getValP, setValP] = useState(0)
 
-  useEffect(() =>{
-    console.log("api",chrome);
-  },[])
+  // useEffect(() =>{
+  //   console.log("api",chrome);
+  // },[])
 
   function onchange(evt){
     setValD(evt.target.value)
