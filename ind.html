@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        fetch("https://api.estadisticasbcra.com/base_usd",{
+        headers: {
+            Authorization: "BEARER eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTMzMDg1NzEsInR5cGUiOiJleHRlcm5hbCIsInVzZXIiOiJlbWlkb3ZpY2hpQGdtYWlsLmNvbSJ9.0kiTqcAs5oQUfIkFTiH6-SVrA0FijAX-Ce3QpMwMisvnezYkQVj4jLYth-E8P-DT1eR2ZKomBy0zxriDj5a8Xg"
+        }
+        }).then((res) => console.log(res))
+    </script>
+</body>
+</html>
