@@ -1,22 +1,31 @@
 {
-    "name" : "Dolar a peso",
-    "description":"conversion de dolar a peso",
-    "version": "1.0",
-    "manifest_version": 3,
-    "action":{
-        "default_popup":"index.html"
-    },
-    "icons": {
-      "48": "dolarico.png"
-    },
-    "commands": {
-        "toggleExtension": {
-          "suggested_key": {
-            "default": "Ctrl+Shift+X",
-            "mac": "MacCtrl+Shift+X"
-          },
-          "description": "Toggle the extension"
-        }
+  "name" : "Dolar a peso",
+  "description":"conversion de dolar a peso",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background":{
+    "service_worker":"req.js",
+    "type":"module"
+  },
+  "action":{
+      "default_popup":"index.html"
+  },
+  "icons": {
+    "48": "dolarico.png"
+  },
+  "commands": {
+      "toggleExtension": {
+        "suggested_key": {
+          "default": "Ctrl+Shift+X",
+          "mac": "MacCtrl+Shift+X"
+        },
+        "description": "Toggle the extension"
       }
+    },
+  "permissions":[
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.api.estadisticasbcra.com/base_usd"
+  ]  
 
 }

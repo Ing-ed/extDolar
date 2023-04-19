@@ -1,7 +1,7 @@
 // /*global chrome*/
 // import { createProxyMiddleware } from 'http-proxy-middleware';
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import  Cheerio  from 'cheerio';
 import "./App.css"
 
 
@@ -12,10 +12,6 @@ function Form(){
   let [getValD, setValD] = useState(0)
   let [getValP, setValP] = useState(0)
 
-  // useEffect(() =>{
-  //   console.log("api",chrome);
-  // },[])
-
   function onchange(evt){
     setValD(evt.target.value)
   }
@@ -23,31 +19,26 @@ function Form(){
     setValP(evt.target.value)
   }
 
-  useEffect(() =>{
-    let url = "https://api.estadisticasbcra.com/base_usd";
-    let cors = "https://cors-anywhere.herokuapp.com/";
-    fetch(cors + url,{
-        headers: {
-            'Content-Type': 'application/json',
-            "accept":"*/*",
-            "Accept-Encoding": "gzip, deflate, br",
-            "Accept-Language": "es-ES,es;q=0.9,en;q=0.8",
-            "Access-Control-Allow-Origin": "*",
-            "Authorization": "BEARER eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTMzMDg1NzEsInR5cGUiOiJleHRlcm5hbCIsInVzZXIiOiJlbWlkb3ZpY2hpQGdtYWlsLmNvbSJ9.0kiTqcAs5oQUfIkFTiH6-SVrA0FijAX-Ce3QpMwMisvnezYkQVj4jLYth-E8P-DT1eR2ZKomBy0zxriDj5a8Xg"
-        }
-    }).then((res) => console.log("RES",res))
-      .catch((err) => console.log(err))
-  },[])
-
   // useEffect(() =>{
-  //   fetch("https://www.dolarsi.com/api/api.php?type=dolar").then(res => res.json())
-  //   .then((res) => {
-  //     setOfi(res[0].casa.venta.replace(",","."))
-  //     setBlue(res[1].casa.venta.replace(",","."))
-  // })
-    // .then((res) => console.log(res[0].casa.venta))
-  //   .catch((err) => console.log(err))
-  // },[])
+  let url = "https://api.estadisticasbcra.com/base_usd";
+  chrome.webRequest.onHeadersReceived.addListener(
+    function(details){
+      details.responseHeaders.push({name: "Access-Control-Allow_Origin",value:"*"});
+      return {responseHeaders:details.responseHeaders};
+    },
+    {urls: ["<all_urls>"], tabId: -1},
+    ["blocking","responseHeaders"]
+  )
+
+  useEffect(() =>{
+    fetch("https://www.dolarsi.com/api/api.php?type=dolar").then(res => res.json())
+    .then((res) => {
+      setOfi(res[0].casa.venta.replace(",","."))
+      setBlue(res[1].casa.venta.replace(",","."))
+  })
+    .then((res) => console.log(res[0].casa.venta))
+    .catch((err) => console.log(err))
+  },[])
   return(
     <section>
       <label>dolar-Of - ${getOfi}</label>
@@ -73,7 +64,9 @@ function App() {
   let jjjj = "Hola"
   // jjjj = getDolarOfi[0]["casa"]["venta"].split(",")[0]
     return(
-      <Form/>
+      <>
+        <Form/>
+      </>
     )
 }
 
