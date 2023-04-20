@@ -21,19 +21,39 @@ function Form(){
 
   // useEffect(() =>{
   let url = "https://api.estadisticasbcra.com/base_usd";
-  chrome.webRequest.onHeadersReceived.addListener(
-    function(details){
-      details.responseHeaders.push({name: "Access-Control-Allow_Origin",value:"*"});
-      return {responseHeaders:details.responseHeaders};
-    },
-    {urls: ["<all_urls>"], tabId: -1},
-    ["blocking","responseHeaders"]
-  )
+  // chrome.webRequest.onHeadersReceived.addListener(
+  //   function(details){
+  //     details.responseHeaders.push({name: "Access-Control-Allow_Origin",value:"*"});
+  //     return {responseHeaders:details.responseHeaders};
+  //   },
+  //   {urls: ["<all_urls>"], tabId: -1},
+  //   ["blocking","responseHeaders"]
+  // )
+    
+  useEffect(() => {
+    fetch("https://bna.com.ar/Personas")
+    .then((r) => r.text())
+    .then((r) => {
+      let i = r.indexOf("Dolar U.S.A")
+      let bloque = r.substring(i)
+      let f = bloque.indexOf("tr")
+      let bloque2 = bloque.substring(0,f)
+      let arr = bloque2.split("\n")
+      let val = arr[2].trim().replace("<td>","").replace("</td>","").replace(",",".")
+      console.log(arr[2].trim().replace("<td>","").replace("</td>",""))
+      console.log(arr, typeof arr)
+      console.log(val,"val")
+      console.log(bloque2)
+      setOfi(val)
+    })
+    .then((r) => console.log(r))
+  },[])
+
 
   useEffect(() =>{
     fetch("https://www.dolarsi.com/api/api.php?type=dolar").then(res => res.json())
     .then((res) => {
-      setOfi(res[0].casa.venta.replace(",","."))
+      // setOfi(res[0].casa.venta.replace(",","."))
       setBlue(res[1].casa.venta.replace(",","."))
   })
     .then((res) => console.log(res[0].casa.venta))

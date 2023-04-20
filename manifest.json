@@ -2,12 +2,8 @@
   "name" : "Dolar a peso",
   "description":"conversion de dolar a peso",
   "version": "1.0",
-  "manifest_version": 3,
-  "background":{
-    "service_worker":"req.js",
-    "type":"module"
-  },
-  "action":{
+  "manifest_version": 2,
+  "browser_action":{
       "default_popup":"index.html"
   },
   "icons": {
@@ -25,7 +21,8 @@
   "permissions":[
     "webRequest",
     "webRequestBlocking",
-    "*://*.api.estadisticasbcra.com/base_usd"
+    "https://api.estadisticasbcra.com/base_usd",
+    "https://bna.com.ar/Personas"
   ]  
 
 }
