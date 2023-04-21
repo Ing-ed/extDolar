@@ -1,7 +1,6 @@
 // /*global chrome*/
 // import { createProxyMiddleware } from 'http-proxy-middleware';
 import { useState, useEffect } from 'react'
-import  Cheerio  from 'cheerio';
 import "./App.css"
 
 
@@ -18,17 +17,6 @@ function Form(){
   function onchange2(evt){
     setValP(evt.target.value)
   }
-
-  // useEffect(() =>{
-  let url = "https://api.estadisticasbcra.com/base_usd";
-  // chrome.webRequest.onHeadersReceived.addListener(
-  //   function(details){
-  //     details.responseHeaders.push({name: "Access-Control-Allow_Origin",value:"*"});
-  //     return {responseHeaders:details.responseHeaders};
-  //   },
-  //   {urls: ["<all_urls>"], tabId: -1},
-  //   ["blocking","responseHeaders"]
-  // )
     
   useEffect(() => {
     fetch("https://bna.com.ar/Personas")
@@ -53,7 +41,6 @@ function Form(){
   useEffect(() =>{
     fetch("https://www.dolarsi.com/api/api.php?type=dolar").then(res => res.json())
     .then((res) => {
-      // setOfi(res[0].casa.venta.replace(",","."))
       setBlue(res[1].casa.venta.replace(",","."))
   })
     .then((res) => console.log(res[0].casa.venta))
@@ -82,7 +69,6 @@ function Form(){
 
 function App() {
   let jjjj = "Hola"
-  // jjjj = getDolarOfi[0]["casa"]["venta"].split(",")[0]
     return(
       <>
         <Form/>
